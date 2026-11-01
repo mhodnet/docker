@@ -1,0 +1,19 @@
+# Stopping any running containers
+if [ "$(docker ps -q)" ]; then
+	echo -n "Stopping all Docker containers..."
+	docker stop $(docker ps -q) &> /dev/null && echo "SUCCESS!"
+fi
+
+
+# Deleting all containers
+if [ "$(docker ps -a -q)" ]; then
+	echo -n "Deleting all Docker containers..."
+	docker rm $(docker ps -a -q) &> /dev/null && echo "SUCCESS!"
+fi
+
+
+# Deleting all images
+if [ "$(docker image ls -a -q)" ]; then
+	echo -n "Deleting all Docker images..."
+	docker rmi $(docker image ls -a -q) &> /dev/null && echo "SUCCESS!"
+fi
